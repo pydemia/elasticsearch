@@ -1,0 +1,9 @@
+NAME: logstash
+LAST DEPLOYED: Sun Feb 21 06:37:47 2021
+NAMESPACE: elasticsearch
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+1. Watch all cluster members come up.
+  $ kubectl get pods --namespace=elasticsearch -l app=logstash-logstash -w

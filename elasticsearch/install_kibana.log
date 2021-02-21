@@ -1,0 +1,6 @@
+NAME: kibana
+LAST DEPLOYED: Sun Feb 21 06:37:52 2021
+NAMESPACE: elasticsearch
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
