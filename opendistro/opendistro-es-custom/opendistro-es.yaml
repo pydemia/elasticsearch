@@ -254,7 +254,7 @@ elasticsearch:
 
   master:
     enabled: true
-    replicas: 1
+    replicas: 2
     updateStrategy: "RollingUpdate"
 
     ## Enable persistence using Persistent Volume Claims
@@ -283,16 +283,16 @@ elasticsearch:
       # storageClass: "-"
       accessModes:
         - ReadWriteOnce
-      size: 8Gi
+      size: 16Gi
       annotations: {}
 
-    resources: {}
-    #  limits:
-    #    cpu: 1
-    #    memory: 1024Mi
-    #  requests:
-    #    cpu: 200m
-    #    memory: 1024Mi
+    resources: 
+      limits:
+        cpu: 2
+        memory: 3Gi
+      requests:
+        cpu: 1
+        memory: 2Gi
     javaOpts: "-Xms512m -Xmx512m"
     podDisruptionBudget:
       enabled: false
@@ -304,7 +304,9 @@ elasticsearch:
       initialDelaySeconds: 60
       periodSeconds: 10
     startupProbe: []
-    nodeSelector: {}
+    # nodeSelector: {}
+    nodeSelector:
+      nodetype: es-datastorage
     tolerations: []
     ## Anti-affinity to disallow deploying client and master nodes on the same worker node
     affinity: {}
@@ -331,7 +333,7 @@ elasticsearch:
     ## Enables dedicated statefulset for data. Otherwise master nodes as data storage
     dedicatedPod:
       enabled: true
-    replicas: 1
+    replicas: 3
     updateStrategy: "RollingUpdate"
 
     ## Enable persistence using Persistent Volume Claims
@@ -360,16 +362,16 @@ elasticsearch:
       # storageClass: "-"
       accessModes:
         - ReadWriteOnce
-      size: 8Gi
+      size: 512Gi
       annotations: {}
 
-    resources: {}
-    #  limits:
-    #    cpu: 1
-    #    memory: 1024Mi
-    #  requests:
-    #    cpu: 200m
-    #    memory: 1024Mi
+    resources: 
+      limits:
+        cpu: 2
+        memory: 3Gi
+      requests:
+        cpu: 1
+        memory: 2Gi
     javaOpts: "-Xms512m -Xmx512m"
     podDisruptionBudget:
       enabled: false
@@ -381,7 +383,9 @@ elasticsearch:
       initialDelaySeconds: 60
       periodSeconds: 10
     startupProbe: []
-    nodeSelector: {}
+    # nodeSelector: {}
+    nodeSelector:
+      nodetype: es-datastorage
     tolerations: []
     ## Anti-affinity to disallow deploying client and master nodes on the same worker node
     affinity: {}
@@ -436,13 +440,14 @@ elasticsearch:
       #  - secretName: chart-example-tls
       #    hosts:
       #      - chart-example.local
-    resources: {}
-    #  limits:
-    #    cpu: 1
-    #    memory: 1024Mi
-    #  requests:
-    #    cpu: 200m
-    #    memory: 1024Mi
+    # resources: {}
+    resources: 
+      limits:
+        cpu: 2
+        memory: 3Gi
+      requests:
+        cpu: 1
+        memory: 2Gi
     podDisruptionBudget:
       enabled: false
       minAvailable: 1
@@ -453,7 +458,9 @@ elasticsearch:
       initialDelaySeconds: 60
       periodSeconds: 10
     startupProbe: []
-    nodeSelector: {}
+    # nodeSelector: {}
+    nodeSelector:
+      nodetype: es-datastorage
     tolerations: []
     ## Weighted anti-affinity to disallow deploying client node to the same worker node as master node
     affinity: {}

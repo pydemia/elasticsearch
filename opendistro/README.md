@@ -203,6 +203,8 @@ helm install ${RELEASE_NAME} opendistro-es-1.13.0.tgz \
 # For zsh, use `\[0\]` instead of `[0]` avoid this error: zsh: no matches found: kibana.extraEnvs[0].name=...
 
 # helm -n ${NAMESPACE} uninstall ${RELEASE_NAME}
+# pvclist="$(kubectl -n ${NAMESPACE} get pvc -o jsonpath='{.items[*].metadata.name}')"
+# kubectl -n ${NAMESPACE} delete pvc $pvclist
 ```
 
 #### Describe `values.yaml`
