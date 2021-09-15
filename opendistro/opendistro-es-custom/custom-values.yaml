@@ -18,16 +18,23 @@ kibana:
   ## Specifies the image pull policy. Can be "Always" or "IfNotPresent" or "Never".
   ## Default to "Always".
   imagePullPolicy: ""
-  replicas: 1
-  port: 5601
-  externalPort: 443
-  resources: {}
+  replicas: 2
+  # resources: {}
   #  limits:
   #    cpu: 2500m
   #    memory: 2Gi
   #  requests:
   #    cpu: 500m
   #    memory: 512Mi
+  resources:
+   limits:
+     cpu: 2
+     memory: 4Gi
+   requests:
+     cpu: 1000m
+     memory: 4Gi
+  port: 5601
+  externalPort: 443
   readinessProbe: []
   livenessProbe: []
   startupProbe: []
@@ -409,14 +416,22 @@ elasticsearch:
       size: 8Gi
       annotations: {}
 
-    resources: {}
+    # resources: {}
     #  limits:
     #    cpu: 1
     #    memory: 1024Mi
     #  requests:
     #    cpu: 200m
     #    memory: 1024Mi
-    javaOpts: "-Xms512m -Xmx512m"
+    # javaOpts: "-Xms512m -Xmx512m"
+    resources:
+     limits:
+       cpu: 2
+       memory: 6Gi
+     requests:
+       cpu: 1000m
+       memory: 4Gi
+    javaOpts: "-Xms2g -Xmx2g"
     podDisruptionBudget:
       enabled: false
       minAvailable: 1
@@ -486,14 +501,22 @@ elasticsearch:
       size: 8Gi
       annotations: {}
 
-    resources: {}
+    # resources: {}
     #  limits:
     #    cpu: 1
     #    memory: 1024Mi
     #  requests:
     #    cpu: 200m
     #    memory: 1024Mi
-    javaOpts: "-Xms512m -Xmx512m"
+    # javaOpts: "-Xms512m -Xmx512m"
+    resources:
+     limits:
+       cpu: 2
+       memory: 6Gi
+     requests:
+       cpu: 1000m
+       memory: 4Gi
+    javaOpts: "-Xms2g -Xmx2g"
     podDisruptionBudget:
       enabled: false
       minAvailable: 1
@@ -541,7 +564,22 @@ elasticsearch:
         # # Annotation to create internal only ELB
         # service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
     replicas: 1
-    javaOpts: "-Xms512m -Xmx512m"
+    # resources: {}
+    #  limits:
+    #    cpu: 1
+    #    memory: 1024Mi
+    #  requests:
+    #    cpu: 200m
+    #    memory: 1024Mi
+    # javaOpts: "-Xms512m -Xmx512m"
+    resources:
+     limits:
+       cpu: 2
+       memory: 6Gi
+     requests:
+       cpu: 1000m
+       memory: 4Gi
+    javaOpts: "-Xms2g -Xmx2g"
     ingress:
       ## Set to true to enable ingress record generation
       enabled: false
@@ -559,13 +597,6 @@ elasticsearch:
       #  - secretName: chart-example-tls
       #    hosts:
       #      - chart-example.local
-    resources: {}
-    #  limits:
-    #    cpu: 1
-    #    memory: 1024Mi
-    #  requests:
-    #    cpu: 200m
-    #    memory: 1024Mi
     podDisruptionBudget:
       enabled: false
       minAvailable: 1

@@ -151,7 +151,7 @@ elasticsearch:
       max_local_storage_nodes: 3
       attr.box_type: hot
 
-    processors: ${PROCESSORS:1}
+    processors: ${PROCESSORS:2}
 
     network.host: ${network.host} # 0.0.0.0 # ${NETWORK_HOST}
 
@@ -198,7 +198,8 @@ elasticsearch:
     - 'CN=*.example.com,OU=example unit,O=example org.,C=KR'
     - 'CN=odfe-cluster*'
     - 'CN=elasticsearch*'
-    - '/CN=.*regex/'
+    - 'CN=*.airuntime.com'
+    
     opendistro_security.nodes_dn:
     - 'CN=*.elasticsearch.svc.cluster.local,OU=example unit,O=example org.,C=KR'
     - 'CN=*.elasticsearch'
@@ -212,7 +213,7 @@ elasticsearch:
     - 'CN=*.example.com,OU=example unit,O=example org.,C=KR'
     - 'CN=odfe-cluster*'
     - 'CN=elasticsearch*'
-    - '/CN=.*regex/'
+    - 'CN=*.airuntime.com'
 
     opendistro_security.enable_snapshot_restore_privilege: true
     opendistro_security.check_snapshot_restore_write_privileges: true
@@ -254,7 +255,7 @@ elasticsearch:
 
   master:
     enabled: true
-    replicas: 2
+    replicas: 3
     updateStrategy: "RollingUpdate"
 
     ## Enable persistence using Persistent Volume Claims
@@ -283,17 +284,17 @@ elasticsearch:
       # storageClass: "-"
       accessModes:
         - ReadWriteOnce
-      size: 16Gi
+      size: 50Gi
       annotations: {}
 
     resources: 
       limits:
         cpu: 2
-        memory: 3Gi
+        memory: 4Gi
       requests:
-        cpu: 1
-        memory: 2Gi
-    javaOpts: "-Xms512m -Xmx512m"
+        cpu: 2
+        memory: 4Gi
+    javaOpts: "-Xms2g -Xmx2g"
     podDisruptionBudget:
       enabled: false
       minAvailable: 1
@@ -368,11 +369,11 @@ elasticsearch:
     resources: 
       limits:
         cpu: 2
-        memory: 3Gi
+        memory: 4Gi
       requests:
-        cpu: 1
-        memory: 2Gi
-    javaOpts: "-Xms512m -Xmx512m"
+        cpu: 2
+        memory: 4Gi
+    javaOpts: "-Xms2g -Xmx2g"
     podDisruptionBudget:
       enabled: false
       minAvailable: 1
@@ -421,8 +422,15 @@ elasticsearch:
 
         # # Annotation to create internal only ELB
         # service.beta.kubernetes.io/aws-load-balancer-internal: 0.0.0.0/0
-    replicas: 1
-    javaOpts: "-Xms512m -Xmx512m"
+    replicas: 2
+    resources: 
+      limits:
+        cpu: 2
+        memory: 4Gi
+      requests:
+        cpu: 2
+        memory: 4Gi
+    javaOpts: "-Xms2g -Xmx2g"
     ingress:
       ## Set to true to enable ingress record generation
       enabled: false
@@ -440,14 +448,7 @@ elasticsearch:
       #  - secretName: chart-example-tls
       #    hosts:
       #      - chart-example.local
-    # resources: {}
-    resources: 
-      limits:
-        cpu: 2
-        memory: 3Gi
-      requests:
-        cpu: 1
-        memory: 2Gi
+    
     podDisruptionBudget:
       enabled: false
       minAvailable: 1

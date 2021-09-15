@@ -2,6 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: odfs-elk-ca-issuer
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -13,6 +14,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: elasticsearch-ca-certs
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -51,6 +53,7 @@ spec:
   - elasticsearch-opendistro-es-discovery
   - elasticsearch-opendistro-es-kibana-svc
   - "*.example.com"
+  - "*.airuntime.com"
   # Issuer references are always required.
   issuerRef:
     name: odfs-elk-ca-issuer
@@ -70,6 +73,7 @@ apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
   name: odfs-elk-issuer
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -82,6 +86,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: elasticsearch-transport-certs
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -120,6 +125,7 @@ spec:
   - elasticsearch-opendistro-es-discovery
   - elasticsearch-opendistro-es-kibana-svc
   - "*.example.com"
+  - "*.airuntime.com"
   # Issuer references are always required.
   issuerRef:
     name: odfs-elk-issuer
@@ -131,6 +137,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: elasticsearch-rest-certs
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -169,6 +176,7 @@ spec:
   - elasticsearch-opendistro-es-discovery
   - elasticsearch-opendistro-es-kibana-svc
   - "*.example.com"
+  - "*.airuntime.com"
   # Issuer references are always required.
   issuerRef:
     name: odfs-elk-issuer
@@ -180,6 +188,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: elasticsearch-admin-certs
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -218,6 +227,7 @@ spec:
   - elasticsearch-opendistro-es-discovery
   - elasticsearch-opendistro-es-kibana-svc
   - "*.example.com"
+  - "*.airuntime.com"
   # Issuer references are always required.
   issuerRef:
     name: odfs-elk-issuer
@@ -229,6 +239,7 @@ apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: kibana-certs
+  namespace: elasticsearch
   labels:
     app: elasticsearch-opendistro-es
 spec:
@@ -267,6 +278,7 @@ spec:
   - elasticsearch-opendistro-es-discovery
   - elasticsearch-opendistro-es-kibana-svc
   - "*.example.com"
+  - "*.airuntime.com"
   # Issuer references are always required.
   issuerRef:
     name: odfs-elk-issuer

@@ -21,13 +21,20 @@ kibana:
   replicas: 1
   port: 5601
   externalPort: 443
-  resources: {}
+  # resources: {}
   #  limits:
   #    cpu: 2500m
   #    memory: 2Gi
   #  requests:
   #    cpu: 500m
   #    memory: 512Mi
+  resources:
+   limits:
+     cpu: 4
+     memory: 4Gi
+   requests:
+     cpu: 2
+     memory: 4Gi
   readinessProbe: []
   livenessProbe: []
   startupProbe: []
@@ -171,7 +178,8 @@ kibana:
   ## Node labels for pod assignment
   ## ref: https://kubernetes.io/docs/user-guide/node-selection/
   #
-  nodeSelector: {}
+  nodeSelector:
+    nodetype: es-datastorage
 
   ## Tolerations for pod assignment
   ## ref: https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/

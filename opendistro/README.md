@@ -205,6 +205,15 @@ helm install ${RELEASE_NAME} opendistro-es-1.13.0.tgz \
 # helm -n ${NAMESPACE} uninstall ${RELEASE_NAME}
 # pvclist="$(kubectl -n ${NAMESPACE} get pvc -o jsonpath='{.items[*].metadata.name}')"
 # kubectl -n ${NAMESPACE} delete pvc $pvclist
+
+NAMESPACE="elasticsearch"
+RELEASE_NAME="elasticsearch"
+helm upgrade ${RELEASE_NAME} opendistro-es-1.13.0.tgz \
+  --namespace=${NAMESPACE} \
+  --values=opendistro-es.yaml \
+  --values=opendistro-kibana.yaml \
+  --set kibana.extraEnvs\[0\].name="ELASTICSEARCH_HOSTS" \
+  --set kibana.extraEnvs\[0\].value="https://${RELEASE_NAME}-opendistro-es-client-service:9200"
 ```
 
 #### Describe `values.yaml`
